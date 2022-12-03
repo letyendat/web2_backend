@@ -25,5 +25,7 @@ app.use('/group', groupRoutes);
 app.use('/presentation', presentationRoutes);
 
 app.use('/user', userRoutes);
+app.use('/', (req, res) => res.json('api run web2'));
+
 // app.use('/payment', paymentRoutes);
 export default app;

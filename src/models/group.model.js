@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { STATUS } from '../constants/data';
+import { STATUS } from '../constants/data.js';
 
 const GroupSchema = new mongoose.Schema(
   {

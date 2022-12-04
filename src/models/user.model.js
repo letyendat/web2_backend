@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { STATUS } from '../constants/data';
+import { STATUS } from '../constants/data.js';
 const UserSchema = new mongoose.Schema(
     {
         name: {

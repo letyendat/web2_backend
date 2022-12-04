@@ -1,11 +1,11 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { hashUser, verifyUser } from '../utils/jwt'
-import { refresh_Token, JWT } from '../utils/auth'
-import UserRepository from '../repositories/user.repository'
-import RefreshTokenRepository from '../repositories/refreshToken.repository'
-import { STATUS } from '../constants/data';
-import { sendEmail } from '../utils/mail';
+import { hashUser, verifyUser } from '../utils/jwt.js'
+import { refresh_Token, JWT } from '../utils/auth.js'
+import UserRepository from '../repositories/user.repository.js'
+import RefreshTokenRepository from '../repositories/refreshToken.repository.js'
+import { STATUS } from '../constants/data.js';
+import { sendEmail } from '../utils/mail.js';
 async function login(body) {
     try {
         const { password, email } = body

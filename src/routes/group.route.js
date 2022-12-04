@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import verifyJWT from '../middleware/verifyJWT'
+import verifyJWT from '../middleware/verifyJWT.js'
 const router = Router();
-import groupController from '../controllers/group.controller';
+import groupController from '../controllers/group.controller.js';
 router.post('/create', verifyJWT(), groupController.create);
 router.get('/', verifyJWT(), groupController.getGroups);
 router.get('/invite', verifyJWT(), groupController.joinGroup);

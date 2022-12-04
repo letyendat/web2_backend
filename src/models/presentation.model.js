@@ -1,9 +1,14 @@
 
 import mongoose from 'mongoose';
-import { STATUS } from '../constants/data';
+import { STATUS } from '../constants/data.js';
 
 const PresenationSchema = new mongoose.Schema(
   {
+    code: {
+      type: Number,
+      default: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
+      unique: true
+    },
     name: {
       type: String,
       required: true,
@@ -18,4 +23,4 @@ const PresenationSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('presenations', PresenationSchema);
+export default mongoose.model('presentations', PresenationSchema);

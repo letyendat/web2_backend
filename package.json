@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "cors": "^2.8.5",
+    "cors": "2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.3",
     "joi": "^17.6.0",
@@ -23,7 +23,9 @@
     "otp-generator": "^4.0.0",
     "redis": "^4.0.6",
     "request": "^2.88.2",
-    "time-stamp": "^2.2.0"
+    "socket.io": "4.4.0",
+    "time-stamp": "^2.2.0",
+    "uuid": "8.3.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",

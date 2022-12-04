@@ -1,4 +1,4 @@
-import refreshTokenModel from "../models/refreshToken.model";
+import refreshTokenModel from "../models/refreshToken.model.js";
 
 async function create(token) {
     return await refreshTokenModel.create(token);

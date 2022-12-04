@@ -1,4 +1,4 @@
-import groupUserRoleModel from "../models/group_user_role.model";
+import groupUserRoleModel from "../models/group_user_role.model.js";
 
 async function findManyUserRole(filter, populate) {
     return await groupUserRoleModel.find(filter).populate(populate).exec();

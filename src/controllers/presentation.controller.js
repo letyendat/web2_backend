@@ -1,5 +1,5 @@
-import presentationService from '../services/presentation.service';
-import userService from '../services/user.service';
+import presentationService from '../services/presentation.service.js';
+import userService from '../services/user.service.js';
 
 async function create(req, res) {
   const user = await userService.getUserOne(req.id);
@@ -8,25 +8,25 @@ async function create(req, res) {
     ...req.body
   }
   try {
-    const group = await presentationService.create(body);
-    res.json(group);
+    const presentation = await presentationService.create(body);
+    res.json(presentation);
   } catch (err) {
-    res.json({ status: false, message: error.message })
+    res.json({ status: false, message: err.message })
   }
 };
 
 async function getPresentations(req, res) {
   try {
     const presentation = await presentationService.getPresentations(req.id);
-    res.json(presentatioi);
+    res.json(presentation);
   } catch (err) {
-    res.json({ status: false, message: error.message })
+    res.json({ status: false, message: err.message })
   }
 }
 
 async function getOne(req, res) {
   try {
-    const presentation = await groupService.getOne(req.query._id)
+    const presentation = await presentationService.getOne(req.query._id)
   
     res.json({ status: true, data: presentation })
   } catch (error) {
@@ -34,8 +34,18 @@ async function getOne(req, res) {
   }
 }
 
+async function deleteOne(req, res) {
+  try {
+    const presentation = await presentationService.deleteOne(req.body._id);
+    res.json(presentation);
+  } catch (err) {
+    res.json({ status: false, message: err.message })
+  }
+}
+
 export default {
   create,
   getPresentations,
   getOne,
+  deleteOne
 }

@@ -1,4 +1,4 @@
-import roleModel from "../models/role.model";
+import roleModel from "../models/role.model.js";
 
 async function create(customer) {
     return await roleModel.create(customer);

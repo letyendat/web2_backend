@@ -1,11 +1,11 @@
 
-import { STATUS } from '../constants/data';
-import { ROLES } from '../constants/roles';
-import groupRepository from '../repositories/group.repository';
-import groupUserRoleRepository from '../repositories/groupUserRole.repository';
-import roleRepository from '../repositories/role.repository';
-import userRepository from '../repositories/user.repository';
-import { sendEmail } from '../utils/mail';
+import { STATUS } from '../constants/data.js';
+import { ROLES } from '../constants/roles.js';
+import groupRepository from '../repositories/group.repository.js';
+import groupUserRoleRepository from '../repositories/groupUserRole.repository.js';
+import roleRepository from '../repositories/role.repository.js';
+import userRepository from '../repositories/user.repository.js';
+import { sendEmail } from '../utils/mail.js';
 async function create(createModel, user_id) {
     try {
         const group = await groupRepository.create({ ...createModel });

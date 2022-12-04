@@ -1,11 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config'
-import userRoutes from './src/routes/user.route'
-import groupRoutes from './src/routes/group.route'
-import presentationRoutes from './src/routes/presentation.route'
+import userRoutes from './src/routes/user.route.js'
+import groupRoutes from './src/routes/group.route.js'
+import presentationRoutes from './src/routes/presentation.route.js'
+import slideRoutes from './src/routes/slide.route.js'
 
-import db from './config/db.config';
+
+import db from './config/db.config.js';
 
 const app = express();
 db.conn.on('open', () => {
@@ -23,7 +25,7 @@ const corsOptions ={
 app.use(cors());
 app.use('/group', groupRoutes);
 app.use('/presentation', presentationRoutes);
-
+app.use('/slide', slideRoutes);
 app.use('/user', userRoutes);
 app.use('/', (req, res) => res.json('api run web2'));
 

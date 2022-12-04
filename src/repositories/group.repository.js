@@ -1,4 +1,4 @@
-import groupModel from "../models/group.model";
+import groupModel from "../models/group.model.js";
 
 async function create(customer) {
     return await groupModel.create(customer);

@@ -1,5 +1,5 @@
-import presentationRepository from '../repositories/presentation.repository';
-import userRepository from '../repositories/user.repository';
+import presentationRepository from '../repositories/presentation.repository.js';
+import userRepository from '../repositories/user.repository.js';
 
 async function create(createModel) {
     try {
@@ -55,7 +55,29 @@ async function getOne(id) {
     }
 }
 
+async function deleteOne(id) {
+    try {
+        const group = await presentationRepository.deleteOne({
+            _id: id
+        })
+        if (!group) {
+            return {
+                status: false,
+                message: 'You cannot delete'
+            }
+        }
+        return {
+            status: true,
+            data: "Delete successful!"
+        }
 
+    } catch (error) {
+        return {
+            status: false,
+            message: error.message
+        }
+    }
+}
 
 
 
@@ -63,4 +85,5 @@ export default {
     create,
     getPresentations,
     getOne,
+    deleteOne,
 };

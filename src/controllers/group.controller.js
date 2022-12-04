@@ -1,5 +1,5 @@
-import groupService from '../services/group.service';
-import userService from '../services/user.service';
+import groupService from '../services/group.service.js';
+import userService from '../services/user.service.js';
 
 async function create(req, res) {
   const user = await userService.getUserOne(req.id);

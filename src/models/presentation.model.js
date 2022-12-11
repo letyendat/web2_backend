@@ -18,6 +18,9 @@ const PresenationSchema = new mongoose.Schema(
     },
     slide_list: {
       type: Array
+    },
+    message_list: {
+      type: Array
     }
   },
   { timestamps: true }

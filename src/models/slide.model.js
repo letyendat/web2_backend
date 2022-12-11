@@ -1,7 +1,7 @@
 
 import mongoose from 'mongoose';
 
-const PresenationSchema = new mongoose.Schema(
+const SlideSchema = new mongoose.Schema(
   {
     presentation_id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -23,4 +23,4 @@ const PresenationSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('slides', PresenationSchema);
+export default mongoose.model('slides', SlideSchema);

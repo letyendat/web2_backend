@@ -37,7 +37,7 @@ class Connection {
     this.sendMultiChoice(resp);
   }
 
-  // ======== MultipleChoice
+  // ======== Message
   async handleMessage(message) {
     const resp = await messageService.create({presentation_id: message.presentation_id, message: message.message, owner_id: message.owner_id});
     const resp_message = await messageService.getOne(resp.data._id);

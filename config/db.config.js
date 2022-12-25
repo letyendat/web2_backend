@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 // import { createClient } from 'redis';
 // global.redisClient = {};
 
-const Url = 'mongodb+srv://test:NKIfsrgfam55@cluster0.sbypu.mongodb.net/?retryWrites=true&w=majority';
+const Url = 'mongodb+srv://final:asd251315100@cluster0.hx9ljdh.mongodb.net/test';
 mongoose.connect(Url,
   {
     useNewUrlParser: true,

@@ -81,7 +81,7 @@ async function createAccount(body) {
             from: process.env.EMAIL,
             to: `${email}`,
             subject: 'Verify Account Web',
-            text: `https://midtermprj12032000hanoi.herokuapp.com/user/verify?_id=${hash_id}`
+            text: `https://web2-backend-8wpp.onrender.com/user/verify?_id=${hash_id}`
         };
         await sendEmail(mailOptions);
         return {

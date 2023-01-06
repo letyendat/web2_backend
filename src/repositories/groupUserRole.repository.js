@@ -19,6 +19,7 @@ async function findOneAndUpdate(filter, dataUpdate) {
 async function deleteOne(filter) {
     return await groupUserRoleModel.deleteOne(filter).exec();
 }
+
 export default {
     findManyUserRole,
     findOne,

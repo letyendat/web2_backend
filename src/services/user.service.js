@@ -137,6 +137,7 @@ async function refreshToken(refresh) {
         return { status: false, message: error.message };
     }
 }
+
 async function getOne(id) {
     try {
         const user = await UserRepository.findOne({ _id: id });

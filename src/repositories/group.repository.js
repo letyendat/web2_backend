@@ -12,8 +12,13 @@ async function findOneAndUpdate(filter, dataUpdate) {
     return await groupModel.findOneAndUpdate(filter, dataUpdate).exec();
 }
 
+async function deleteOne(filter) {
+    return await groupModel.deleteOne(filter).exec();
+}
+
 export default {
     create,
     findOne,
     findOneAndUpdate,
+    deleteOne,
 }

@@ -72,7 +72,16 @@ async function getAllMembers(req, res) {
 }
 async function deleteMember(req, res) {
   try {
-    const groups = await groupService.deleteOne(req.query.group_id, req.query.user_id);
+    const groups = await groupService.deleteOneMember(req.id, req.body.group_id, req.body.user_id_delete);
+    res.json({ status: true, message: "Delete successfull" });
+  } catch (err) {
+    res.json({ status: false, message: error.message })
+  }
+}
+
+async function deleteGroup(req, res) {
+  try {
+    const groups = await groupService.deleteOneGroup(req.id, req.body.group_id);
     res.json({ status: true, message: "Delete successfull" });
   } catch (err) {
     res.json({ status: false, message: error.message })
@@ -86,5 +95,6 @@ export default {
   createInvitationLink,
   getOne,
   getAllMembers,
-  deleteMember
+  deleteMember,
+  deleteGroup
 }

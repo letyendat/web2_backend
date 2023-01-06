@@ -218,12 +218,64 @@ async function getDataOfGroup(group_id) {
     }
 }
 
-async function deleteOne(group_id, user_id) {
+async function deleteOneMember(user_id, group_id, user_id_delete) {
     try {
-        const group = await groupUserRoleRepository.deleteOne({
-            group_id, user_id
-        })
+        const group = await groupRepository.findOne({ _id: group_id });
         if (!group) {
+            return 'Group not found';
+        }
+
+        if (group.owner_id != user_id) {
+            return 'User no onwer group';
+        }
+
+        console.log(user_id_delete, group_id)
+        const resp = await groupUserRoleRepository.deleteOne({
+            user_id: user_id_delete, group_id: group_id
+        })
+        if (!resp) {
+            return {
+                status: false,
+                message: 'You cannot delete'
+            }
+        }
+        return {
+            status: true,
+            data: "Delete successful!"
+        }
+
+    } catch (error) {
+        return {
+            status: false,
+            message: error.message
+        }
+    }
+}
+
+async function deleteOneGroup(user_id, group_id) {
+    try {
+        const group = await groupRepository.findOne({ _id: group_id });
+        if (!group) {
+            return 'Group not found';
+        }
+
+        if (group.owner_id != user_id) {
+            return 'User no onwer group';
+        }
+
+        const members = await getAllMembers(group_id);
+        if (!members) {
+            return 'Group not found';
+        }
+
+        for (let i = 0; i < members.data.length; i++) {
+            const resp = await deleteOneMember(user_id, group_id, members.data[i].user_id._id);
+        }
+
+        const resp = await groupRepository.deleteOne({
+            _id: group_id
+        })
+        if (!resp) {
             return {
                 status: false,
                 message: 'You cannot delete'
@@ -250,6 +302,7 @@ export default {
     createLink,
     getOne,
     getAllMembers,
-    deleteOne,
-    getDataOfGroup
+    deleteOneMember,
+    getDataOfGroup,
+    deleteOneGroup
 };

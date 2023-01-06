@@ -9,5 +9,7 @@ router.get('/create_link', verifyJWT(), groupController.createInvitationLink);
 router.get('/send_link', verifyJWT(), groupController.sendInvitationLink);
 router.get('/getone', verifyJWT(), groupController.getOne);
 router.get('/get_all_member', verifyJWT(), groupController.getAllMembers);
-router.delete('/delete', verifyJWT(), groupController.deleteMember);
+router.delete('/delete_member', verifyJWT(), groupController.deleteMember);
+router.delete('/delete_group', verifyJWT(), groupController.deleteGroup);
+
 export default router;

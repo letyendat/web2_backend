@@ -6,7 +6,7 @@ async function hashUser(id) {
             id
         },
         token_secret,
-        { expiresIn: '1h' }
+        { expiresIn: '48h' }
     );
     return token;
 }

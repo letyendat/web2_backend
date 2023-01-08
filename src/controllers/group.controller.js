@@ -87,6 +87,15 @@ async function deleteGroup(req, res) {
     res.json({ status: false, message: error.message })
   }
 }
+
+async function updateRole(req, res) {
+  try {
+    const role = await groupService.updateRole(req.id, req.body.group_id, req.body.user_id_update, req.body.role);
+    res.json(role);
+  } catch (err) {
+    res.json({ status: false, message: error.message })
+  }
+};
 export default {
   create,
   joinGroup,
@@ -96,5 +105,6 @@ export default {
   getOne,
   getAllMembers,
   deleteMember,
-  deleteGroup
+  deleteGroup,
+  updateRole
 }

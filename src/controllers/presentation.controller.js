@@ -34,6 +34,26 @@ async function getOne(req, res) {
   }
 }
 
+async function getSlidesOfPresentation(req, res) {
+  try {
+    const presentation = await presentationService.getSlidesOfPresentation(req.query._id)
+  
+    res.json({ status: true, data: presentation })
+  } catch (error) {
+    res.json({ status: false, error: error.message });
+  }
+}
+
+async function getSlidesByCode(req, res) {
+  try {
+    const presentation = await presentationService.getSlidesByCode(req.query.code)
+  
+    res.json({ status: true, data: presentation })
+  } catch (error) {
+    res.json({ status: false, error: error.message });
+  }
+}
+
 async function deleteOne(req, res) {
   try {
     const presentation = await presentationService.deleteOne(req.body._id);
@@ -47,5 +67,7 @@ export default {
   create,
   getPresentations,
   getOne,
-  deleteOne
+  deleteOne,
+  getSlidesOfPresentation,
+  getSlidesByCode
 }

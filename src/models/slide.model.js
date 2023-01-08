@@ -18,6 +18,9 @@ const SlideSchema = new mongoose.Schema(
     datas: {
         type: Array,
         default: [0, 0, 0, 0]
+    },
+    slide_type: {
+      type: Number,
     }
   },
   { timestamps: true }

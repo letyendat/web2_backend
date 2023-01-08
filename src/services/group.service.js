@@ -30,6 +30,32 @@ async function create(createModel, user_id) {
         }
     }
 }
+
+async function updateRole(user_id, group_id, user_id_update, role) { //role la 2 va 3
+    try {
+        let role_x;
+        if (role === 2) {
+            role_x = await roleRepository.findOne({ name: ROLES.CO_OWNER });
+        } else if (role === 3) {
+            role_x = await roleRepository.findOne({ name: ROLES.MEMBER });
+        }
+
+        const group_user_role = await groupUserRoleRepository.findOneAndUpdate({ user_id: user_id_update, group_id: group_id }, { $set: { role_id: role_x._id } })
+        if (!group_user_role) {
+            return { status: false, message: 'Can not create Group' };
+        }
+        return {
+            status: true, data: group_user_role
+        }
+
+    } catch (error) {
+        return {
+            status: false,
+            message: error.message
+        }
+    }
+}
+
 async function joinGroup(group, user_id) {
     try {
         const user = await userRepository.findOne({ _id: user_id, status: STATUS.ACTIVE });
@@ -229,7 +255,6 @@ async function deleteOneMember(user_id, group_id, user_id_delete) {
             return 'User no onwer group';
         }
 
-        console.log(user_id_delete, group_id)
         const resp = await groupUserRoleRepository.deleteOne({
             user_id: user_id_delete, group_id: group_id
         })
@@ -304,5 +329,6 @@ export default {
     getAllMembers,
     deleteOneMember,
     getDataOfGroup,
-    deleteOneGroup
+    deleteOneGroup,
+    updateRole,
 };

@@ -11,5 +11,6 @@ router.get('/getone', verifyJWT(), groupController.getOne);
 router.get('/get_all_member', verifyJWT(), groupController.getAllMembers);
 router.delete('/delete_member', verifyJWT(), groupController.deleteMember);
 router.delete('/delete_group', verifyJWT(), groupController.deleteGroup);
+router.put('/update_role', verifyJWT(), groupController.updateRole);
 
 export default router;

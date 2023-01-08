@@ -1,11 +1,11 @@
 import presentationRepository from '../repositories/presentation.repository.js';
-import slideRepository from '../repositories/slide.repository.js';
+import slideParagraphRepository from '../repositories/slideParagraph.repository.js';
 // import io from '../../index.js';
 
 async function create(createModel) {
     try {
-        createModel.slide_type = 1;
-        const slide = await slideRepository.create({ ...createModel });
+        createModel.slide_type = 3;
+        const slide = await slideParagraphRepository.create({ ...createModel });
         if (!slide) {
             return { status: false, message: 'Can not create slide' };
         }
@@ -17,7 +17,7 @@ async function create(createModel) {
         let slide_list = presentation.slide_list;
         let object_slide_id = {
             id: slide._id,
-            id_type: 1
+            id_type: 3
         };
         slide_list.push(object_slide_id);
 
@@ -40,13 +40,12 @@ async function create(createModel) {
 
 async function update(id, data) {
     try {
-        const slide = await slideRepository.findOneAndUpdate(
+        const slide = await slideParagraphRepository.findOneAndUpdate(
             { _id: id },
             {
                 $set: {
-                    question: data.question,
-                    labels: data.labels,
-                    datas: data.datas,
+                    heading: data.heading,
+                    paragraph: data.paragraph
                 }
             });
 
@@ -68,7 +67,7 @@ async function update(id, data) {
 
 async function getSlides(presentation_id) {
     try {
-        const slides = await slideRepository.findMany({ presentation_id: presentation_id })
+        const slides = await slideParagraphRepository.findMany({ presentation_id: presentation_id })
         if (!slides) {
             return {
                 status: false,
@@ -89,7 +88,7 @@ async function getSlides(presentation_id) {
 
 async function getOne(id) {
     try {
-        const slide = await slideRepository.findOne({ _id: id });
+        const slide = await slideParagraphRepository.findOne({ _id: id });
         if (!slide) return {
             status: false, data: "cant get Slide"
         }
@@ -117,39 +116,9 @@ async function getSlidesByCode(code) {
     }
 }
 
-async function updateOption(id, index) {
-    try {
-        let slideOld = await slideRepository.findOne({ _id: id });
-        slideOld.datas[index]++;
-        const datas = slideOld.datas;
-
-        const slide = await slideRepository.findOneAndUpdate(
-            { _id: id },
-            {
-                $set: {
-                    datas: datas,
-                }
-            });
-
-        if (!slide) {
-            return { status: false, message: 'Can not update slide' };
-        }
-
-        return {
-            status: true, data: slide
-        }
-
-    } catch (error) {
-        return {
-            status: false,
-            message: error.message
-        }
-    }
-}
-
 async function deleteOne(id) {
     try {
-        const group = await slideRepository.deleteOne({
+        const group = await slideParagraphRepository.deleteOne({
             _id: id
         })
         if (!group) {
@@ -177,6 +146,5 @@ export default {
     getSlides,
     getOne,
     getSlidesByCode,
-    updateOption,
     deleteOne
 };

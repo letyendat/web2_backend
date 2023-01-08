@@ -16,8 +16,8 @@ class Connection {
 
     socket.on('getMessages', (presentation_id) => this.getMessages(presentation_id))
     socket.on('message', (message) => this.handleMessage(message))
-    socket.on('muiltiChoice', (muiltiChoice) => this.handleMultiChoice(muiltiChoice));
-
+    socket.on('multiChoice', (multiChoice) => this.handleMultiChoice(multiChoice));
+    socket.on('presentation', (presentation) => this.handlePresentation(presentation));
     // socket.on('disconnect', () => this.disconnect());
     socket.on('connect_error', (err) => {
       console.log(`connect_error due to ${err.message}`);
@@ -25,15 +25,14 @@ class Connection {
   }
   
   // ======== MultipleChoice
-  sendMultiChoice(muiltiChoice) {
-    this.io.sockets.emit('muiltiChoice', muiltiChoice);
+  sendMultiChoice(multiChoice) {
+    this.io.sockets.emit('multiChoice', multiChoice);
   }
   // getMultiChoices() {
   //   messages.forEach((muiltiChoide) => this.sendMultiChoice(muiltiChoide));
   // }
-  async handleMultiChoice(muiltiChoice) {
-    const resp = await slideService.updateOption(muiltiChoice.id, muiltiChoice.index);
-
+  async handleMultiChoice(multiChoice) {
+    const resp = await slideService.updateOption(multiChoice.id, multiChoice.index);
     this.sendMultiChoice(resp);
   }
 
@@ -47,10 +46,17 @@ class Connection {
     this.io.sockets.emit('message', message);
   }
   async getMessages(presentation_id) {
-    console.log(presentation_id);
     const messages = await messageService.getMessages(presentation_id);
 
     messages.data.forEach((message) => this.sendMessage(message));
+  }
+
+  // ======== Presentation
+  sendPresentation(presentation) {
+    this.io.sockets.emit('presentation', presentation);
+  }
+  async handlePresentation(presentation) {
+    this.sendPresentation(presentation);
   }
 
   disconnect() {
